@@ -127,7 +127,6 @@ python deepsky/explainable_ai/CAM.py --image=imgs/cirrus.jpg  --model_file=runs/
 0.000 -> 6_cumulonimbus
 output CAM.jpg for the top1 prediction: 3_cirrus
 ```
-![](imgs/CAM.jpg)
  
 
 ## Funding
