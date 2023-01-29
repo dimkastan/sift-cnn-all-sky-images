@@ -1,0 +1,14 @@
+pytest
+torch
+torchvision
+numpy
+Pillow
+scikit-image 
+scikit-learn
+pandas
+opencv-python
+tensorboard
+pyyaml
+matplotlib
+tqdm
+torchsampler

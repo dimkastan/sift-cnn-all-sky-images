@@ -1,0 +1,15 @@
+{
+    "lr"             : 0.01,
+    "batch_size"     : 32,
+    "weight_decay"   : 0.00002,
+    "epochs"         : 50,
+    "tune_last_layer": false,
+    "Normalize"      : true,
+    "pretrained"     : true, 
+    "pretrainedModel": "",
+    "SIZE"           : 280,
+    "CROP_SIZE"      : 256, 
+    "train_data"     : "/home/ellab4gpu/KastanWorkingDir/GRSCD/train",
+    "test_data"      : "/home/ellab4gpu/KastanWorkingDir/GRSCD/test"
+}
+ 

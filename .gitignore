@@ -1,0 +1,4 @@
+tmp/**
+runs/
+deepsky/evaluate_models/evaluate_rgb_model.py
+deepsky/scripts/*

@@ -1,0 +1,16 @@
+{
+    "lr"             : 0.001,
+    "batch_size"     : 32,
+    "weight_decay"   : 0.00002,
+    "epochs"         : 10,
+    "tune_last_layer": false,
+    "Normalize"      : true,
+    "pretrained"     : true, 
+    "pretrainedModel": "weights/initialization/Init_resnet_siftcnn.tar",
+    "SIZE"           : 280,
+    "CROP_SIZE"      : 256, 
+    "train_data"     : "/home/ellab4gpu/KastanWorkingDir/GRSCD/train",
+    "val_data"       : "",
+    "test_data"      : "/home/ellab4gpu/KastanWorkingDir/GRSCD/test"
+}
+ 
