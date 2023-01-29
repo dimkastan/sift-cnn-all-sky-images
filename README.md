@@ -113,20 +113,20 @@ Note: Currently works only with RGB model.
 Soon I will add the RGB+SIFT-CNN
 
 ![](imgs/CAM.jpg)
-```
+ 
 How to use:
 
 ```
 python deepsky/explainable_ai/CAM.py --image=imgs/cirrus.jpg  --model_file=runs/Jan29_16-13-18_ellab4gpu-X299X-AORUS-MASTERrgb.log/checkpoint_train_eval_other0035_99.83552551269531.pth.tar
 ```
-
+```
 0.992 -> 3_cirrus
 0.008 -> 4_clearsky
 0.000 -> 2_altocumulus
 0.000 -> 7_mixed
 0.000 -> 6_cumulonimbus
 output CAM.jpg for the top1 prediction: 3_cirrus
-
+```
 ![](imgs/CAM.jpg)
  
 
