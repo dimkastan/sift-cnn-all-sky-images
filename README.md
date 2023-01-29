@@ -1,9 +1,9 @@
-# Unofficial implementation of SIFT-CNN: When Convolutional Neural Networks Meet Dense SIFT Descriptors for Image and Sequence Classification
+## Unofficial implementation of SIFT-CNN: When Convolutional Neural Networks Meet Dense SIFT Descriptors for Image and Sequence Classification
 
 This repo implements the following paper:
-```
-Tsourounis, D.; Kastaniotis, D.; Theoharatos, C.; Kazantzidis, A.; Economou, G. SIFT-CNN: When Convolutional Neural Networks Meet Dense SIFT Descriptors for Image and Sequence Classification. J. Imaging 2022, 8, 256. https://doi.org/10.3390/jimaging8100256
-```
+<em>
+Tsourounis, D.; Kastaniotis, D.; Theoharatos, C.; Kazantzidis, A.; Economou, G. [SIFT-CNN: When Convolutional Neural Networks Meet Dense SIFT Descriptors for Image and Sequence Classification](https://www.mdpi.com/2313-433X/8/10/256). J. Imaging 2022, 8, 256. https://doi.org/10.3390/jimaging8100256
+</em>
 
 If you use the following code you need to cite the following work:
 
