@@ -99,12 +99,52 @@ tensorboard --logdir runs/
 
 ### Evaluate model
 
+#### General info
 Load a checkpoint, define a train and a test set and run model evaluation
 
 Warning: By default, the results and the confusion matrix will be writen to the model's folder in `results.txt` and `Confusion-01_25_2023_23_13_16.png`
 
 Note 2: If you want to run an evaluation for a trained model you can find where it was trained on by looking at `runs/experiment-number.log/training.log` file. There we mention the train_data and test_data variables
 However, you can run the evaluation on any dataset.
+
+#### How to run
+
+
+You need to select an architecture and provide the weights of the model trained with this architecture. 
+In the following example the `rgb_siftcnn` architecture is used and the model is `checkpoint_train_eval_other0004_94.57237243652344.pth.tar` located in `runs/Jan30_00-39-02_ellab4gpu-X299X-AORUS-MASTERrgb.log/` 
+
+```
+python deepsky/evaluate_models/evaluate_model.py --weights="runs/Jan30_00
+-39-02_ellab4gpu-X299X-AORUS-MASTERrgb.log/checkpoint_train_eval_other0004_94.57237243652344.pth.tar" --arch=rgb_siftcnn --train_data=/home/ellab4gpu/KastanWorkingDir/GRSCD/train --test_data=/home/ellab4gpu/KastanWorkingDir/GRSCD/test    
+```
+
+You will see something like:
+```
+100%|████████████████████████████████████████████████████████████| 4000/4000 [00:39<00:00, 101.53it/s]
+100%|████████████████████████████████████████████████████████████| 4000/4000 [00:37<00:00, 106.09it/s]
+Testing acc = 0.86425
+Look at
+runs/Jan30_00-39-02_ellab4gpu-X299X-AORUS-MASTERrgb.log
+```
+
+That means that you can find the model inside `runs/Jan30_00-39-02_ellab4gpu-X299X-AORUS-MASTERrgb.log`
+
+```
+-------------------------------------- 
+                   Post CNN evaluation 
+-------------------------------------- 
+/home/ellab4gpu/KastanWorkingDir/GRSCD/train
+/home/ellab4gpu/KastanWorkingDir/GRSCD/test
+0.86425
+       0      1      2       3      4      5      6
+0  97.33   1.74   0.00    0.13   0.00   0.00   0.80
+1   0.30  73.11   2.72    0.00  15.71   6.65   1.51
+2   0.00   1.63  95.39    0.00   0.30   0.00   2.67
+3   0.00   0.00   0.00  100.00   0.00   0.00   0.00
+4   0.00   0.00   0.86    2.81  90.28   5.62   0.43
+5   0.00   0.00   1.87    0.85  13.97  83.30   0.00
+6   6.27  21.18  21.57    0.00   0.20   1.76  49.02
+````
 
 
 ### Explainable AI

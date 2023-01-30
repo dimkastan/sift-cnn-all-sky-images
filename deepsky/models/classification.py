@@ -90,8 +90,9 @@ def return_sift_cnn(device, NUM_CLASSES,model_file,  pretrained=True, finetune=F
     resnet_image = torchvision.models.resnet18(pretrained=pretrained ).to(device) 
     model = SIFTCNN_RESNET(siftflownet, resnet,resnet_image,  device=device)
     if(model_file!=''):
-      res = model.load_state_dict(torch.load(model_file,map_location=device)['state_dict'], strict=True   )
-      print(res)
+        print(model_file)
+        res = model.load_state_dict(torch.load(model_file,map_location=device)['state_dict'], strict=True   )
+        print(res)
     if(feature_only==True):
         model.fc1 = torch.nn.Identity()
     return model
