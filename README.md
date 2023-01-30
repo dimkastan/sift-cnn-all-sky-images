@@ -1,4 +1,4 @@
-## Unofficial implementation of SIFT-CNN: When Convolutional Neural Networks Meet Dense SIFT Descriptors for Image and Sequence Classification
+## Implementation of work based on paper "SIFT-CNN: When Convolutional Neural Networks Meet Dense SIFT Descriptors for Image and Sequence Classification"
 
 This repo implements the following paper:
 <em>
