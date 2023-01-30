@@ -27,7 +27,7 @@ from torchvision import transforms, datasets
 from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
 from torchvision import datasets
-from deepsky.dataloaders.contrastive_learning_dataset import *
+from deepsky.dataloaders.deepsky_dataset import *
 import torch
 import glob
 from torch.utils.data import Dataset, DataLoader

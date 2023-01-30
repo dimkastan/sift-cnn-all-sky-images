@@ -18,11 +18,7 @@ def return_resnet_18(device, NUM_CLASSES,model_file, pretrained=True, finetune=F
     if(finetune):
         for param in resnet.parameters():
           param.requires_grad = False
-    # d = resnet.fc.in_features # get vector dimensions
     resnet.fc    = torch.nn.Linear(512,NUM_CLASSES).to(device) 
-    # if(model_file):
-    #     print("LOADING USER SPECIFIED MODEL {}".format(model_file))
-    #     res = resnet.load_state_dict(torch.load(model_file,map_location=device)['state_dict'], strict=False   )
     if(feature_only):
         resnet.fc= torch.nn.Identity()
     return resnet
@@ -51,20 +47,10 @@ class SIFTCNN_RESNET(torch.nn.Module):
         self.model2 = resnet
         self.model2.conv1=torch.nn.Conv2d(64,64,5,2,1).to(device)  
         self.model1 = resnet_image
-        # self.model2.conv1=torch.nn.Conv2d(1,64,5,2,1).to(device) 
         self.model2.fc=Identity() 
         self.model1.fc=Identity()
         self.dropout = torch.nn.Dropout(0.2)
         self.fc1 = torch.nn.Linear(1024,7).to(device) 
-        # self.fc2 = torch.nn.Linear(128,7).to(device) 
-        # import random
-        # resnet.conv1=torch.nn.Conv2d(64,64,7,2,1).to(device)
-        # resnet.conv1.weight.data
-        # resnet_all.conv1.weight.data.shape
-        # resnet.conv1.weight.data.shape
-        # for i in range(64):
-        #     index = random.randint(0,2)
-        #     self.model1.conv1.weight[:,i,:,:].copy_( self.model2.conv1.weight[:,index,:,:])
     def forward(self, x):
         x1 = self.sift.extract_descriptor(x[:,1,:,:].unsqueeze(1).to('cpu'))
         x1 = self.model2(x1)

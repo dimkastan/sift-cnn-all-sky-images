@@ -15,7 +15,7 @@ import json
 import torch
 import torchvision
 from deepsky.utils.ellab_utils import returnCAM
-from deepsky.dataloaders.contrastive_learning_dataset import *
+from deepsky.dataloaders.deepsky_dataset import *
 import glob
 from torch.utils.data import Dataset, DataLoader
 

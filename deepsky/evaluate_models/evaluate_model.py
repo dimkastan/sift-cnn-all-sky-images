@@ -16,7 +16,7 @@ if not path in sys.path:
 
 from tqdm import tqdm
 from deepsky.models.classification import return_resnet_18, return_sift_cnn
-from deepsky.dataloaders.contrastive_learning_dataset import *
+from deepsky.dataloaders.deepsky_dataset import *
 eval_training_set = False
 
 import argparse

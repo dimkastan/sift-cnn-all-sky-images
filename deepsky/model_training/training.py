@@ -8,7 +8,7 @@ from deepsky.utils.utils   import save_config_file, accuracy, save_checkpoint
 import torch
 from tqdm import tqdm
 
-from deepsky.dataloaders.contrastive_learning_dataset import *
+from deepsky.dataloaders.deepsky_dataset import *
 from deepsky.models.classification import return_resnet_18
 from deepsky.utils.utils import estimate_mean_var
 from torch.utils.data import DataLoader, ConcatDataset

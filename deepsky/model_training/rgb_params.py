@@ -1,4 +1,4 @@
-from deepsky.dataloaders.contrastive_learning_dataset import *
+from deepsky.dataloaders.deepsky_dataset import *
 from deepsky.models.classification import return_resnet_18, return_sift_cnn
 from ..utils.utils import estimate_mean_var
 from torch.utils.data import DataLoader, ConcatDataset

@@ -54,6 +54,14 @@ pip3 install -r requirements.txt
 
 ``` 
 
+#### Dataset
+
+You need to download "TJNU-Ground-based-Remote-Sensing-Cloud-Database" dataset from the following URL:.
+
+https://github.com/shuangliutjnu/TJNU-Ground-based-Remote-Sensing-Cloud-Database
+
+
+
 ### Train RGB
 
 Current script loads parms from rgb_params (central crop based to align with narrow all sky image lenses)
@@ -81,6 +89,7 @@ python deepsky/model_training/train_siftcnn_fusion.py --config=config/grscd_imag
 ```bash
 tensorboard --logdir runs/
 ```
+
 ```
 [Accuracy][2]Train, val, test =89.86565399169922 ,89.74781036376953, 82.87500762939453
 100%|███████████████████████████████████████████████████████████████| 107/107 [00:32<00:00,  3.25it/s]
@@ -157,8 +166,9 @@ Soon I will add the RGB+SIFT-CNN
 How to use:
 
 ```
-python deepsky/explainable_ai/CAM.py --image=imgs/cirrus.jpg  --model_file=runs/Jan29_16-13-18_ellab4gpu-X299X-AORUS-MASTERrgb.log/checkpoint_train_eval_other0035_99.83552551269531.pth.tar
+python deepsky/explainable_ai/CAM.py --image=imgs/cirrus.jpg  --model_file=<you-rgb-model>
 ```
+
 ```
 0.992 -> 3_cirrus
 0.008 -> 4_clearsky
