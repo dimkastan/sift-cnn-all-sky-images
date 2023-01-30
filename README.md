@@ -1,30 +1,39 @@
-## Implementation of work based on paper "SIFT-CNN: When Convolutional Neural Networks Meet Dense SIFT Descriptors for Image and Sequence Classification"
+## Implementation of the SIFT-CNN method  
 
 This repo implements the following paper:
 <em>
-Tsourounis, D.; Kastaniotis, D.; Theoharatos, C.; Kazantzidis, A.; Economou, G. [SIFT-CNN: When Convolutional Neural Networks Meet Dense SIFT Descriptors for Image and Sequence Classification](https://www.mdpi.com/2313-433X/8/10/256). J. Imaging 2022, 8, 256. https://doi.org/10.3390/jimaging8100256
+Tsourounis, D.; Kastaniotis, D.; Theoharatos, C.; Kazantzidis, A.; Economou, G. [SIFT-CNN: When Convolutional Neural 
+Networks Meet Dense SIFT Descriptors for Image and Sequence Classification](https://www.mdpi.com/2313-433X/8/10/256). J. 
+Imaging 2022, 8, 256. https://doi.org/10.3390/jimaging8100256
 </em>
 
-If you use the following code you need to cite the following work:
+This repository contains code to train CNN topologies for the allsky cloud type classification problem using the TJNU-Ground-based-Remote-Sensing-Cloud-Database (TJNU-GRSCD). The TJNU-GRSCD dataset is composed of 4,000 training images and 4,000 test images from 7 classes according to seven sky types [1] [2]. Two CNN topologies are implemented on this repository. 
 
-```
-@Article{jimaging8100256,
-AUTHOR = {Tsourounis, Dimitrios and Kastaniotis, Dimitris and Theoharatos, Christos and Kazantzidis, Andreas and Economou, George},
-TITLE = {SIFT-CNN: When Convolutional Neural Networks Meet Dense SIFT Descriptors for Image and Sequence Classification},
-JOURNAL = {Journal of Imaging},
-VOLUME = {8},
-YEAR = {2022},
-NUMBER = {10},
-ARTICLE-NUMBER = {256},
-URL = {https://www.mdpi.com/2313-433X/8/10/256},
-ISSN = {2313-433X},
-DOI = {10.3390/jimaging8100256}
-}
-```
- 
+![](imgs/Pixel_CNN_and_lateFusionWithSIFT_CNN.png)
+
+
+The first CNN topology is fed with RGB images and provides the final classification result as a typical CNN model for the image classification problem. This approach is referred as Pixel-CNN.
+
+The second CNN topology involves the SIFT-CNN method and is referred as late fusion pixel-CNN and SIFT-CNN. This second topology is an extension of the Pixel-CNN since it combines the Pixel-CNN and the SIFT-CNN. The proposed late fusion scheme with the pixel-CNN and SIFT-CNN consists of two streams. On the one stream, the RGB image is fed into the pixel-CNN and produces a 512-dimensional feature vector (as in the first case below). On the other stream, the RGB image is converted to Grayscale image and then it is fed into the SIFT-CNN which is produced another 512-dimensional feature vector. Finally, these two vectors are concatenated (resulting in a final combined feature vector with 1024 dimensions) and then fed to a fully connected layer with seven neurons for the final class prediction into seven cloud classes. Ultimately, the two-stream scheme is trained following an end-to-end fashion.
+
+Also, this repository contains code to train SVM classifier utilizing the final feature vectors which could be extracted from the CNN topologies after their training.
+
+
+[1] Liu, S., Li, M., Zhang, Z., Cao, X., & Durrani, T. S. (2020). Ground‐based cloud classification using task‐based 
+graph convolutional network. Geophysical Research Letters, 47(5), e2020GL087338.
+
+[2] Liu, S., Li, M., Zhang, Z., Xiao, B., & Durrani, T. S. (2020). Multi-evidence and multi-modal fusion network for 
+ground-based cloud recognition. Remote Sensing, 12(3), 464.
+
+
+#### Dataset
+
+The project uses the TJNU-GRSCD dataset and therefore, you need to download the data from the official repository: https://github.com/shuangliutjnu/TJNU-Ground-based-Remote-Sensing-Cloud-Database.
+
+
 
 ### Notice:
-We rollout pieces of the code step-by-step so stay tuned! 
+We rollout pieces of the code step-by-step so stay tuned!
 
 
 ### Environment setup
@@ -52,22 +61,17 @@ source ./myenv/bin/activate
 pip3 install -r requirements.txt
 
 
-``` 
+```
 
-#### Dataset
+### Train the Pixel-CNN with RGB input images
 
-You need to download "TJNU-Ground-based-Remote-Sensing-Cloud-Database" dataset from the following URL:.
-
-https://github.com/shuangliutjnu/TJNU-Ground-based-Remote-Sensing-Cloud-Database
+![](imgs/Pixel_CNN.png)
 
 
-
-### Train RGB
-
-Current script loads parms from rgb_params (central crop based to align with narrow all sky image lenses)
+Current script loads params from rgb_params 
 
 ```bash
-# train on grscd 
+# train on grscd
 python deepsky/model_training/train.py --config config/gsrcd.json
 ```
 
@@ -77,11 +81,11 @@ python deepsky/model_training/train.py --config config/gsrcd.json
 tensorboard --logdir runs/
 ```
 
-### Train RGB+SIFT_CNN
+### Train the late fusion scheme with the combination of Pixel-CNN + SIFT-CNN
 
-![](imgs/rgb_siftcnn_fusion.png)
+![](imgs/lateFusionWithSIFT_CNN.png)
 ```
-python deepsky/model_training/train_siftcnn_fusion.py --config=config/grscd_imagenet_siftcnnfusion.json 
+python deepsky/model_training/train_siftcnn_fusion.py --config=config/grscd_imagenet_siftcnnfusion.json
 ```
 
 - In another terminal run tensorboard
@@ -119,8 +123,8 @@ However, you can run the evaluation on any dataset.
 #### How to run
 
 
-You need to select an architecture and provide the weights of the model trained with this architecture. 
-In the following example the `rgb_siftcnn` architecture is used and the model is `checkpoint_train_eval_other0004_94.57237243652344.pth.tar` located in `runs/Jan30_00-39-02_ellab4gpu-X299X-AORUS-MASTERrgb.log/` 
+You need to select an architecture and provide the weights of the model trained with this architecture.
+In the following example the `rgb_siftcnn` architecture is used and the model is `checkpoint_train_eval_other0004_94.57237243652344.pth.tar` located in `runs/Jan30_00-39-02_ellab4gpu-X299X-AORUS-MASTERrgb.log/`
 
 ```
 python deepsky/evaluate_models/evaluate_model.py --weights="runs/Jan30_00
@@ -139,9 +143,9 @@ runs/Jan30_00-39-02_ellab4gpu-X299X-AORUS-MASTERrgb.log
 That means that you can find the model inside `runs/Jan30_00-39-02_ellab4gpu-X299X-AORUS-MASTERrgb.log`
 
 ```
--------------------------------------- 
-                   Post CNN evaluation 
--------------------------------------- 
+--------------------------------------
+                   Post CNN evaluation
+--------------------------------------
 /home/ellab4gpu/KastanWorkingDir/GRSCD/train
 /home/ellab4gpu/KastanWorkingDir/GRSCD/test
 0.86425
@@ -162,7 +166,7 @@ Note: Currently works only with RGB model.
 Soon I will add the RGB+SIFT-CNN
 
 ![](imgs/CAM.jpg)
- 
+
 How to use:
 
 ```
@@ -177,8 +181,29 @@ python deepsky/explainable_ai/CAM.py --image=imgs/cirrus.jpg  --model_file=<you-
 0.000 -> 6_cumulonimbus
 output CAM.jpg for the top1 prediction: 3_cirrus
 ```
- 
+
 
 ## Funding
 
 This research has been co-financed by the European Union and Greek national funds through the Operational Program Competitiveness, Entrepreneurship and Innovation, under the call RESEARCH–CREATE–INNOVATE (project code: T1EDK–00681, MIS 5067617).
+
+
+## Citation
+
+If you use our code, please consider citing the following paper:
+
+```
+@Article{jimaging8100256,
+AUTHOR = {Tsourounis, Dimitrios and Kastaniotis, Dimitris and Theoharatos, Christos and Kazantzidis, Andreas and 
+Economou, George},
+TITLE = {SIFT-CNN: When Convolutional Neural Networks Meet Dense SIFT Descriptors for Image and Sequence Classification},
+JOURNAL = {Journal of Imaging},
+VOLUME = {8},
+YEAR = {2022},
+NUMBER = {10},
+ARTICLE-NUMBER = {256},
+URL = {https://www.mdpi.com/2313-433X/8/10/256},
+ISSN = {2313-433X},
+DOI = {10.3390/jimaging8100256}
+}
+```
